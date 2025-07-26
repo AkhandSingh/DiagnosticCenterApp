@@ -23,7 +23,7 @@ namespace ADC
             patientForm.Show();
         }
 
-        private void ToolStripPrintPatientReport_Click(object sender, EventArgs e)
+        private void ToolStripPrintPatientReceipt_Click(object sender, EventArgs e)
         {
             Receipt receiptForm = new Receipt();
             receiptForm.Show();

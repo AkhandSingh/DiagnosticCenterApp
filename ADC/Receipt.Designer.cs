@@ -43,8 +43,6 @@
             LblPtAddressTitle = new Label();
             LblReferredBy = new Label();
             LblReferredByTitle = new Label();
-            LblColorDoppler = new Label();
-            LblColorDopplerTitle = new Label();
             LblUsg = new Label();
             LblUsgTitle = new Label();
             LblEcg = new Label();
@@ -57,8 +55,9 @@
             LblAmountTitle = new Label();
             LabelSearchByMob = new Label();
             BtnPrint = new Button();
-            textBox1 = new TextBox();
+            TxtMobileNumber = new TextBox();
             BtnSearchByMob = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // lblCenterHeading
@@ -139,7 +138,7 @@
             // LblAge
             // 
             LblAge.AutoSize = true;
-            LblAge.Location = new Point(710, 334);
+            LblAge.Location = new Point(700, 334);
             LblAge.Name = "LblAge";
             LblAge.Size = new Size(50, 20);
             LblAge.TabIndex = 8;
@@ -199,24 +198,6 @@
             LblReferredByTitle.TabIndex = 11;
             LblReferredByTitle.Text = "ADV BY DR:";
             // 
-            // LblColorDoppler
-            // 
-            LblColorDoppler.AutoSize = true;
-            LblColorDoppler.Location = new Point(510, 418);
-            LblColorDoppler.Name = "LblColorDoppler";
-            LblColorDoppler.Size = new Size(50, 20);
-            LblColorDoppler.TabIndex = 18;
-            LblColorDoppler.Text = "label8";
-            // 
-            // LblColorDopplerTitle
-            // 
-            LblColorDopplerTitle.AutoSize = true;
-            LblColorDopplerTitle.Location = new Point(380, 418);
-            LblColorDopplerTitle.Name = "LblColorDopplerTitle";
-            LblColorDopplerTitle.Size = new Size(124, 20);
-            LblColorDopplerTitle.TabIndex = 17;
-            LblColorDopplerTitle.Text = "COLOR DOPPLER:";
-            // 
             // LblUsg
             // 
             LblUsg.AutoSize = true;
@@ -238,7 +219,7 @@
             // LblEcg
             // 
             LblEcg.AutoSize = true;
-            LblEcg.Location = new Point(434, 455);
+            LblEcg.Location = new Point(708, 418);
             LblEcg.Name = "LblEcg";
             LblEcg.Size = new Size(58, 20);
             LblEcg.TabIndex = 22;
@@ -247,7 +228,7 @@
             // LblEcgTitle
             // 
             LblEcgTitle.AutoSize = true;
-            LblEcgTitle.Location = new Point(380, 455);
+            LblEcgTitle.Location = new Point(654, 418);
             LblEcgTitle.Name = "LblEcgTitle";
             LblEcgTitle.Size = new Size(48, 20);
             LblEcgTitle.TabIndex = 21;
@@ -256,7 +237,7 @@
             // LblXray
             // 
             LblXray.AutoSize = true;
-            LblXray.Location = new Point(126, 455);
+            LblXray.Location = new Point(433, 418);
             LblXray.Name = "LblXray";
             LblXray.Size = new Size(50, 20);
             LblXray.TabIndex = 20;
@@ -265,7 +246,7 @@
             // LblXrayTitle
             // 
             LblXrayTitle.AutoSize = true;
-            LblXrayTitle.Location = new Point(73, 455);
+            LblXrayTitle.Location = new Point(380, 418);
             LblXrayTitle.Name = "LblXrayTitle";
             LblXrayTitle.Size = new Size(47, 20);
             LblXrayTitle.TabIndex = 19;
@@ -274,7 +255,7 @@
             // LblManager
             // 
             LblManager.AutoSize = true;
-            LblManager.Location = new Point(469, 492);
+            LblManager.Location = new Point(469, 461);
             LblManager.Name = "LblManager";
             LblManager.Size = new Size(58, 20);
             LblManager.TabIndex = 26;
@@ -283,7 +264,7 @@
             // LblManagerTitle
             // 
             LblManagerTitle.AutoSize = true;
-            LblManagerTitle.Location = new Point(380, 492);
+            LblManagerTitle.Location = new Point(380, 461);
             LblManagerTitle.Name = "LblManagerTitle";
             LblManagerTitle.Size = new Size(83, 20);
             LblManagerTitle.TabIndex = 25;
@@ -292,7 +273,7 @@
             // LblAmount
             // 
             LblAmount.AutoSize = true;
-            LblAmount.Location = new Point(154, 492);
+            LblAmount.Location = new Point(154, 461);
             LblAmount.Name = "LblAmount";
             LblAmount.Size = new Size(58, 20);
             LblAmount.TabIndex = 24;
@@ -301,7 +282,7 @@
             // LblAmountTitle
             // 
             LblAmountTitle.AutoSize = true;
-            LblAmountTitle.Location = new Point(73, 492);
+            LblAmountTitle.Location = new Point(73, 461);
             LblAmountTitle.Name = "LblAmountTitle";
             LblAmountTitle.Size = new Size(75, 20);
             LblAmountTitle.TabIndex = 23;
@@ -324,13 +305,14 @@
             BtnPrint.TabIndex = 28;
             BtnPrint.Text = "Print Receipt";
             BtnPrint.UseVisualStyleBackColor = true;
+            BtnPrint.Click += BtnPrint_Click;
             // 
-            // textBox1
+            // TxtMobileNumber
             // 
-            textBox1.Location = new Point(264, 62);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 29;
+            TxtMobileNumber.Location = new Point(264, 62);
+            TxtMobileNumber.Name = "TxtMobileNumber";
+            TxtMobileNumber.Size = new Size(125, 27);
+            TxtMobileNumber.TabIndex = 29;
             // 
             // BtnSearchByMob
             // 
@@ -340,6 +322,15 @@
             BtnSearchByMob.TabIndex = 30;
             BtnSearchByMob.Text = "Search";
             BtnSearchByMob.UseVisualStyleBackColor = true;
+            BtnSearchByMob.Click += BtnSearchByMob_Click;
+            // 
+            // panel1
+            // 
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Location = new Point(40, 34);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(931, 83);
+            panel1.TabIndex = 31;
             // 
             // Receipt
             // 
@@ -348,7 +339,7 @@
             BackColor = Color.White;
             ClientSize = new Size(1025, 581);
             Controls.Add(BtnSearchByMob);
-            Controls.Add(textBox1);
+            Controls.Add(TxtMobileNumber);
             Controls.Add(BtnPrint);
             Controls.Add(LabelSearchByMob);
             Controls.Add(LblManager);
@@ -359,8 +350,6 @@
             Controls.Add(LblEcgTitle);
             Controls.Add(LblXray);
             Controls.Add(LblXrayTitle);
-            Controls.Add(LblColorDoppler);
-            Controls.Add(LblColorDopplerTitle);
             Controls.Add(LblUsg);
             Controls.Add(LblUsgTitle);
             Controls.Add(LblPtAddress);
@@ -378,8 +367,10 @@
             Controls.Add(lblContact);
             Controls.Add(lblAddressHeading);
             Controls.Add(lblCenterHeading);
+            Controls.Add(panel1);
             Name = "Receipt";
             Text = "Receipt";
+            Load += Receipt_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -401,8 +392,6 @@
         private Label LblPtAddressTitle;
         private Label LblReferredBy;
         private Label LblReferredByTitle;
-        private Label LblColorDoppler;
-        private Label LblColorDopplerTitle;
         private Label LblUsg;
         private Label LblUsgTitle;
         private Label LblEcg;
@@ -415,7 +404,8 @@
         private Label LblAmountTitle;
         private Label LabelSearchByMob;
         private Button BtnPrint;
-        private TextBox textBox1;
+        private TextBox TxtMobileNumber;
         private Button BtnSearchByMob;
+        private Panel panel1;
     }
 }

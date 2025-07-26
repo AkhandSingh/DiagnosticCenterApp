@@ -1,5 +1,6 @@
 ﻿using AdcData;
 using AdcData.Interfaces;
+using AdcData.Models;
 using AdcData.Repositories;
 using System.Drawing.Printing;
 
@@ -10,7 +11,7 @@ namespace ADC
         AdcDbContext _context;
         IPatientRepository _patientRepository;
         IDiagnosticRepository _diagnosticRepository;
-
+        PatientDiagnostic _patientDiagnostic;
 
         public Receipt()
         {
@@ -21,19 +22,33 @@ namespace ADC
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {
-            PrintDocument printDoc = new PrintDocument();
-            printDoc.PrintPage += PrintDoc_PrintPage;
+            try
+            {   
+                if (_patientDiagnostic == null)
+                {
+                    MessageBox.Show("Please search for a patient first before printing.");
+                    return;
+                }
 
-            printDoc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
-            printDoc.PrinterSettings.PrintToFile = true;
-            printDoc.PrinterSettings.PrintFileName = @"C:\Users\Public\receipt.pdf";
+                PrintDocument printDoc = new PrintDocument();
+                printDoc.PrintPage += PrintDoc_PrintPage;
 
-            printDoc.Print();
+                printDoc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
+                printDoc.PrinterSettings.PrintToFile = true;
+                printDoc.PrinterSettings.PrintFileName = @"C:\DiagnosticReports\receipt.pdf";
+
+                printDoc.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while printing: {ex.Message}");
+            }
+           
         }
 
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            var patientDiagnostic = _patientRepository.GetPatientDiagnosticByMobileBumber(9560971335);
+            var patientDiagnostic = _patientDiagnostic;
             int margin = 50;
             int top = margin;
 
@@ -71,11 +86,13 @@ namespace ADC
 
                 top += rowHeight;
                 e.Graphics.DrawString($"USG: {(diagnosticCategory == "USG" ? diagnosticSubCategory : string.Empty)}", normalFont, Brushes.Black, margin, top);
-                e.Graphics.DrawString($"COLOR DOPPLER: ", normalFont, Brushes.Black, margin + 250, top);
-
-                top += rowHeight;
-                e.Graphics.DrawString($"XRAY: {(diagnosticCategory == "XRAY" ? diagnosticSubCategory : string.Empty)}", normalFont, Brushes.Black, margin, top);
-                e.Graphics.DrawString($"E.C.G.: {(diagnosticCategory == "ECG" ? diagnosticSubCategory : string.Empty)}", normalFont, Brushes.Black, margin + 250, top);
+                //e.Graphics.DrawString($"COLOR DOPPLER: ", normalFont, Brushes.Black, margin + 250, top);
+                e.Graphics.DrawString($"XRAY: {(diagnosticCategory == "XRAY" ? "XRAY" : string.Empty)}", normalFont, Brushes.Black, margin + 250, top);
+                e.Graphics.DrawString($"E.C.G.: {(diagnosticCategory == "ECG" ? "E.C.G" : string.Empty)}", normalFont, Brushes.Black, margin + 500, top);
+                
+                //top += rowHeight;
+                //e.Graphics.DrawString($"XRAY: {(diagnosticCategory == "XRAY" ? "XRAY" : string.Empty)}", normalFont, Brushes.Black, margin, top);
+                //e.Graphics.DrawString($"E.C.G.: {(diagnosticCategory == "ECG" ? "E.C.G" : string.Empty)}", normalFont, Brushes.Black, margin + 250, top);
 
                 top += rowHeight;
                 e.Graphics.DrawString($"AMOUNT: {patientDiagnostic.Diagnostic.Amount}", normalFont, Brushes.Black, margin, top);
@@ -87,17 +104,52 @@ namespace ADC
 
         private void Receipt_Load(object sender, EventArgs e)
         {
-
+            ClearLabes();
         }
 
         private void ClearLabes()
         {
-            foreach (Control control in Controls)
-            {
-                if (control is Label label)
+            LblAge.Text = string.Empty;
+            LblAmount.Text = string.Empty;
+            LblEcg.Text = string.Empty;
+            LblManager.Text = string.Empty;
+            LblMobileNum.Text = string.Empty;
+            LblPtAddress.Text = string.Empty;
+            LblPtName.Text = string.Empty;
+            LblReferredBy.Text = string.Empty;
+            LblSex.Text = string.Empty;
+            LblUsg.Text = string.Empty;
+            LblXray.Text = string.Empty;
+        }
+
+        private void BtnSearchByMob_Click(object sender, EventArgs e)
+        {
+            long mobileNumber;
+            long.TryParse(TxtMobileNumber.Text, out mobileNumber);
+            _patientDiagnostic = _patientRepository.GetPatientDiagnosticByMobileBumber(mobileNumber);
+
+            if (_patientDiagnostic != null && _patientDiagnostic.Patient != null)
+            {       
+                LblPtName.Text = _patientDiagnostic.Patient.Name;
+                LblMobileNum.Text = _patientDiagnostic.Patient.MobileNumber.ToString();
+                LblAge.Text = _patientDiagnostic.Patient.Age.ToString();
+                LblSex.Text = _patientDiagnostic.Patient.Sex;
+                LblPtAddress.Text = _patientDiagnostic.Patient.Address;
+
+                if (_patientDiagnostic.Diagnostic != null)
                 {
-                    label.Text = string.Empty;
+                    LblReferredBy.Text = _patientDiagnostic.Diagnostic.ReferredBy;
+                    LblUsg.Text = _patientDiagnostic.Diagnostic.DiagnosticCategory == "USG" ? _patientDiagnostic.Diagnostic.DiagnosticSubCategory : string.Empty;
+                    LblXray.Text = _patientDiagnostic.Diagnostic.DiagnosticCategory == "XRAY" ? "XRAY" : string.Empty;
+                    LblEcg.Text = _patientDiagnostic.Diagnostic.DiagnosticCategory == "ECG" ? "E.C.G." : string.Empty;
+                    LblAmount.Text = _patientDiagnostic.Diagnostic.Amount.ToString();
+                    LblManager.Text = _patientDiagnostic.Diagnostic.Manager;
                 }
+            }
+            else
+            {
+                MessageBox.Show("No patient found with the provided mobile number.");
+                ClearLabes();
             }
         }
     }

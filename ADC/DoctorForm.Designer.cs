@@ -41,12 +41,25 @@
             label1 = new Label();
             TxtDegree = new TextBox();
             LblDegree = new Label();
+            PnlDoctor = new Panel();
+            PnlDcotorList = new Panel();
+            DgvDoctor = new DataGridView();
+            DgvColName = new DataGridViewTextBoxColumn();
+            DgvColMobileNumber = new DataGridViewTextBoxColumn();
+            DgvColHospital = new DataGridViewTextBoxColumn();
+            DgvColDegree = new DataGridViewTextBoxColumn();
+            DgvColSpecialization = new DataGridViewTextBoxColumn();
+            DgvColAddress = new DataGridViewTextBoxColumn();
+            DgvColId = new DataGridViewTextBoxColumn();
+            PnlDoctor.SuspendLayout();
+            PnlDcotorList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvDoctor).BeginInit();
             SuspendLayout();
             // 
             // LblName
             // 
             LblName.AutoSize = true;
-            LblName.Location = new Point(39, 54);
+            LblName.Location = new Point(44, 39);
             LblName.Name = "LblName";
             LblName.Size = new Size(99, 20);
             LblName.TabIndex = 0;
@@ -55,7 +68,7 @@
             // LblHospital
             // 
             LblHospital.AutoSize = true;
-            LblHospital.Location = new Point(39, 221);
+            LblHospital.Location = new Point(44, 206);
             LblHospital.Name = "LblHospital";
             LblHospital.Size = new Size(65, 20);
             LblHospital.TabIndex = 2;
@@ -64,7 +77,7 @@
             // LblAddress
             // 
             LblAddress.AutoSize = true;
-            LblAddress.Location = new Point(39, 260);
+            LblAddress.Location = new Point(44, 245);
             LblAddress.Name = "LblAddress";
             LblAddress.Size = new Size(62, 20);
             LblAddress.TabIndex = 3;
@@ -72,47 +85,47 @@
             // 
             // TxtDoctorName
             // 
-            TxtDoctorName.Location = new Point(201, 54);
+            TxtDoctorName.Location = new Point(206, 39);
             TxtDoctorName.Name = "TxtDoctorName";
             TxtDoctorName.Size = new Size(234, 27);
-            TxtDoctorName.TabIndex = 4;
+            TxtDoctorName.TabIndex = 1;
             // 
             // TxtHospital
             // 
-            TxtHospital.Location = new Point(201, 221);
+            TxtHospital.Location = new Point(206, 206);
             TxtHospital.Name = "TxtHospital";
             TxtHospital.Size = new Size(234, 27);
-            TxtHospital.TabIndex = 6;
+            TxtHospital.TabIndex = 5;
             // 
             // TxtAddress
             // 
-            TxtAddress.Location = new Point(201, 260);
+            TxtAddress.Location = new Point(206, 245);
             TxtAddress.Multiline = true;
             TxtAddress.Name = "TxtAddress";
-            TxtAddress.Size = new Size(234, 96);
-            TxtAddress.TabIndex = 7;
+            TxtAddress.Size = new Size(234, 149);
+            TxtAddress.TabIndex = 6;
             // 
             // BtnAddDoctor
             // 
-            BtnAddDoctor.Location = new Point(273, 391);
+            BtnAddDoctor.Location = new Point(278, 413);
             BtnAddDoctor.Name = "BtnAddDoctor";
             BtnAddDoctor.Size = new Size(162, 29);
-            BtnAddDoctor.TabIndex = 8;
+            BtnAddDoctor.TabIndex = 7;
             BtnAddDoctor.Text = "Add";
             BtnAddDoctor.UseVisualStyleBackColor = true;
             BtnAddDoctor.Click += BtnAddDoctor_Click;
             // 
             // TxtMobileNum
             // 
-            TxtMobileNum.Location = new Point(201, 98);
+            TxtMobileNum.Location = new Point(206, 83);
             TxtMobileNum.Name = "TxtMobileNum";
             TxtMobileNum.Size = new Size(234, 27);
-            TxtMobileNum.TabIndex = 10;
+            TxtMobileNum.TabIndex = 2;
             // 
             // LblMobile
             // 
             LblMobile.AutoSize = true;
-            LblMobile.Location = new Point(39, 98);
+            LblMobile.Location = new Point(44, 83);
             LblMobile.Name = "LblMobile";
             LblMobile.Size = new Size(114, 20);
             LblMobile.TabIndex = 9;
@@ -120,15 +133,15 @@
             // 
             // TxtSpecialization
             // 
-            TxtSpecialization.Location = new Point(201, 184);
+            TxtSpecialization.Location = new Point(206, 169);
             TxtSpecialization.Name = "TxtSpecialization";
             TxtSpecialization.Size = new Size(234, 27);
-            TxtSpecialization.TabIndex = 12;
+            TxtSpecialization.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(39, 184);
+            label1.Location = new Point(44, 169);
             label1.Name = "label1";
             label1.Size = new Size(102, 20);
             label1.TabIndex = 11;
@@ -136,19 +149,108 @@
             // 
             // TxtDegree
             // 
-            TxtDegree.Location = new Point(201, 142);
+            TxtDegree.Location = new Point(206, 127);
             TxtDegree.Name = "TxtDegree";
             TxtDegree.Size = new Size(234, 27);
-            TxtDegree.TabIndex = 14;
+            TxtDegree.TabIndex = 3;
             // 
             // LblDegree
             // 
             LblDegree.AutoSize = true;
-            LblDegree.Location = new Point(39, 142);
+            LblDegree.Location = new Point(44, 127);
             LblDegree.Name = "LblDegree";
             LblDegree.Size = new Size(58, 20);
             LblDegree.TabIndex = 13;
             LblDegree.Text = "Degree";
+            // 
+            // PnlDoctor
+            // 
+            PnlDoctor.Controls.Add(TxtDegree);
+            PnlDoctor.Controls.Add(TxtDoctorName);
+            PnlDoctor.Controls.Add(LblDegree);
+            PnlDoctor.Controls.Add(LblName);
+            PnlDoctor.Controls.Add(TxtSpecialization);
+            PnlDoctor.Controls.Add(LblHospital);
+            PnlDoctor.Controls.Add(label1);
+            PnlDoctor.Controls.Add(LblAddress);
+            PnlDoctor.Controls.Add(TxtMobileNum);
+            PnlDoctor.Controls.Add(TxtHospital);
+            PnlDoctor.Controls.Add(LblMobile);
+            PnlDoctor.Controls.Add(TxtAddress);
+            PnlDoctor.Controls.Add(BtnAddDoctor);
+            PnlDoctor.Location = new Point(61, 50);
+            PnlDoctor.Name = "PnlDoctor";
+            PnlDoctor.Size = new Size(516, 493);
+            PnlDoctor.TabIndex = 15;
+            // 
+            // PnlDcotorList
+            // 
+            PnlDcotorList.Controls.Add(DgvDoctor);
+            PnlDcotorList.Location = new Point(607, 50);
+            PnlDcotorList.Name = "PnlDcotorList";
+            PnlDcotorList.Size = new Size(829, 493);
+            PnlDcotorList.TabIndex = 16;
+            // 
+            // DgvDoctor
+            // 
+            DgvDoctor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvDoctor.Columns.AddRange(new DataGridViewColumn[] { DgvColName, DgvColMobileNumber, DgvColHospital, DgvColDegree, DgvColSpecialization, DgvColAddress, DgvColId });
+            DgvDoctor.Location = new Point(12, 39);
+            DgvDoctor.Name = "DgvDoctor";
+            DgvDoctor.RowHeadersWidth = 51;
+            DgvDoctor.Size = new Size(801, 403);
+            DgvDoctor.TabIndex = 0;
+            // 
+            // DgvColName
+            // 
+            DgvColName.HeaderText = "Name";
+            DgvColName.MinimumWidth = 6;
+            DgvColName.Name = "DgvColName";
+            DgvColName.Width = 125;
+            // 
+            // DgvColMobileNumber
+            // 
+            DgvColMobileNumber.HeaderText = "Mob Number";
+            DgvColMobileNumber.MinimumWidth = 6;
+            DgvColMobileNumber.Name = "DgvColMobileNumber";
+            DgvColMobileNumber.Width = 125;
+            // 
+            // DgvColHospital
+            // 
+            DgvColHospital.HeaderText = "Hospital";
+            DgvColHospital.MinimumWidth = 6;
+            DgvColHospital.Name = "DgvColHospital";
+            DgvColHospital.Width = 125;
+            // 
+            // DgvColDegree
+            // 
+            DgvColDegree.HeaderText = "Degree";
+            DgvColDegree.MinimumWidth = 6;
+            DgvColDegree.Name = "DgvColDegree";
+            DgvColDegree.Width = 125;
+            // 
+            // DgvColSpecialization
+            // 
+            DgvColSpecialization.HeaderText = "Specialization";
+            DgvColSpecialization.MinimumWidth = 6;
+            DgvColSpecialization.Name = "DgvColSpecialization";
+            DgvColSpecialization.Width = 125;
+            // 
+            // DgvColAddress
+            // 
+            DgvColAddress.HeaderText = "Address";
+            DgvColAddress.MinimumWidth = 6;
+            DgvColAddress.Name = "DgvColAddress";
+            DgvColAddress.Width = 125;
+            // 
+            // DgvColId
+            // 
+            DgvColId.HeaderText = "Id";
+            DgvColId.MinimumWidth = 6;
+            DgvColId.Name = "DgvColId";
+            DgvColId.ReadOnly = true;
+            DgvColId.Visible = false;
+            DgvColId.Width = 125;
             // 
             // DoctorForm
             // 
@@ -156,23 +258,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(1482, 653);
-            Controls.Add(TxtDegree);
-            Controls.Add(LblDegree);
-            Controls.Add(TxtSpecialization);
-            Controls.Add(label1);
-            Controls.Add(TxtMobileNum);
-            Controls.Add(LblMobile);
-            Controls.Add(BtnAddDoctor);
-            Controls.Add(TxtAddress);
-            Controls.Add(TxtHospital);
-            Controls.Add(TxtDoctorName);
-            Controls.Add(LblAddress);
-            Controls.Add(LblHospital);
-            Controls.Add(LblName);
+            Controls.Add(PnlDcotorList);
+            Controls.Add(PnlDoctor);
             Name = "DoctorForm";
             Text = "Doctor";
+            Load += DoctorForm_Load;
+            PnlDoctor.ResumeLayout(false);
+            PnlDoctor.PerformLayout();
+            PnlDcotorList.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DgvDoctor).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -190,5 +285,15 @@
         private Label label1;
         private TextBox TxtDegree;
         private Label LblDegree;
+        private Panel PnlDoctor;
+        private Panel PnlDcotorList;
+        private DataGridView DgvDoctor;
+        private DataGridViewTextBoxColumn DgvColName;
+        private DataGridViewTextBoxColumn DgvColMobileNumber;
+        private DataGridViewTextBoxColumn DgvColHospital;
+        private DataGridViewTextBoxColumn DgvColDegree;
+        private DataGridViewTextBoxColumn DgvColSpecialization;
+        private DataGridViewTextBoxColumn DgvColAddress;
+        private DataGridViewTextBoxColumn DgvColId;
     }
 }

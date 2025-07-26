@@ -27,12 +27,27 @@ namespace ADC
         {
             try
             {
+                long mobileNumber;
+                long.TryParse(TxtMobileNum.Text, out mobileNumber);
+                if (mobileNumber <= 0 || TxtMobileNum.Text.Length < 10)
+                {
+                    MessageBox.Show("Please enter a valid mobile number.");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(TxtPatientName.Text) || string.IsNullOrWhiteSpace(CmbAge.Text) ||
+                    string.IsNullOrWhiteSpace(CmbSex.Text) || string.IsNullOrWhiteSpace(TxtAddress.Text) ||
+                    string.IsNullOrWhiteSpace(TxtGaurdian.Text) || string.IsNullOrWhiteSpace(CmbDiagnostic.Text))
+                {
+                    MessageBox.Show("Please fill in all required fields.");
+                    return;
+                }
+
                 long patientId;
-                var patient =  _patientRepository.GetPatientByMobileNumber(Convert.ToInt64(TxtMobileNum.Text));
+                var patient = _patientRepository.GetPatientByMobileNumber(mobileNumber);
                 if (patient != null)
                 {
                     patientId = patient.Id;
-                } 
+                }
                 else
                 {
                     Patient patientNew = new Patient
@@ -106,7 +121,7 @@ namespace ADC
                 Value = d.Id
             }).ToList();
 
-            CmbSonologist.DataSource = doctors.Where(d=>d.Specialization.ToLower().Contains("sonologist")).Select(d => new
+            CmbSonologist.DataSource = doctors.Where(d => !string.IsNullOrWhiteSpace(d.Specialization) && d.Specialization.ToLower().Contains("sonologist")).Select(d => new
             {
                 Text = d.Name,
                 Value = d.Id
@@ -115,6 +130,72 @@ namespace ADC
             CmbSonologist.DisplayMember = "Text";
             CmbSonologist.ValueMember = "Value";
 
+        }
+
+        private void BtnSearchByMob_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                long mobileNumber;
+                long.TryParse(TxtSearchMobileNumber.Text, out mobileNumber);
+
+                if (mobileNumber > 0)
+                {
+                    var patient = _patientRepository.GetPatientByMobileNumber(mobileNumber);
+                    if (patient != null)
+                    {
+                        TxtPatientName.Text = patient.Name;
+                        CmbAge.Text = patient.Age.ToString();
+                        CmbSex.Text = patient.Sex;
+                        TxtAddress.Text = patient.Address;
+                        TxtGaurdian.Text = patient.Gaurdian;
+                        TxtMobileNum.Text = patient.MobileNumber.ToString();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Please enter the correct mobile number");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error fetching patient details: {ex.Message}");
+            }
+        }
+
+        private void CmbDiagnostic_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CmbDiagnostic.SelectedItem != null)
+            {
+                string selectedDiagnostic = CmbDiagnostic.SelectedItem.ToString();
+                if (selectedDiagnostic == "USG")
+                {
+                    var subCategories = new List<string>
+                    {
+                        "WHOLE ABDOMEN",
+                        "FWB",
+                        "COLOR DOPPLER"
+                    };
+                    CmbDiagnosticSubCat.Visible = true;
+                    CmbDiagnosticSubCat.DisplayMember = "Text";
+                    CmbDiagnosticSubCat.ValueMember = "Value";
+                    CmbDiagnosticSubCat.DataSource = subCategories.Select(subCategory => new
+                    {
+                        Text = subCategory,
+                        Value = subCategory
+                    }).ToList();
+                }
+                else
+                {
+                    CmbDiagnosticSubCat.Visible = false;
+                    CmbDiagnosticSubCat.DataSource = null;
+                }
+            }
+            else
+            {
+                CmbDiagnosticSubCat.Visible = false;
+                CmbDiagnosticSubCat.DataSource = null;
+            }
         }
     }
 }

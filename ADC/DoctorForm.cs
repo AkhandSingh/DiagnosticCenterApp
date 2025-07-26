@@ -28,20 +28,27 @@ namespace ADC
         {
             try
             {
+                if(string.IsNullOrWhiteSpace(TxtDoctorName.Text))
+                {
+                    MessageBox.Show("Please fill doctor name.");
+                    return;
+                }
+
                 int mobileNo;
                 bool isMoNumParsed = int.TryParse(TxtMobileNum.Text, out mobileNo);
                 Doctor doctor = new Doctor
                 {
                     Name = TxtDoctorName.Text,
                     MobileNo = isMoNumParsed ? Convert.ToInt32(TxtMobileNum.Text) : null,
-                    Degree = TxtDegree.Text,
-                    Specialization = TxtMobileNum.Text,
-                    Address = TxtAddress.Text,
-                    Hospital = TxtHospital.Text
+                    Degree = string.IsNullOrEmpty(TxtDegree.Text)? null: TxtDegree.Text,
+                    Specialization = string.IsNullOrEmpty(TxtMobileNum.Text) ? null : TxtMobileNum.Text,
+                    Address = string.IsNullOrEmpty(TxtAddress.Text) ? null : TxtAddress.Text,
+                    Hospital = string.IsNullOrEmpty(TxtHospital.Text) ? null : TxtHospital.Text
                 };
                 _doctorRepository.Add(doctor);
                 _doctorRepository.SaveChanges();
                 MessageBox.Show($"Doctor added successfully.");
+                LoadDoctors();
             }
             catch (Exception ex)
             {
@@ -62,6 +69,49 @@ namespace ADC
             TxtDegree.Clear();
             TxtSpecialization.Clear();
             TxtMobileNum.Clear();
+        }
+
+        private void DoctorForm_Load(object sender, EventArgs e)
+        {
+            LoadDoctors();
+        }
+
+        private void LoadDoctors()
+        {
+            try
+            {
+                // Fetch all doctors and bind to DataGridView with columns matching the Doctor model
+                var doctors = _doctorRepository.GetAll()
+                    .Select(d => new
+                    {
+                        d.Id,
+                        d.Name,
+                        d.MobileNo,
+                        d.Degree,
+                        d.Specialization,
+                        d.Address,
+                        d.Hospital
+                    })
+                    .ToList();
+
+                DgvDoctor.Rows.Clear();
+                foreach (var doc in doctors)
+                {
+                    DgvDoctor.Rows.Add(
+                        doc.Name,
+                        doc.MobileNo,
+                        doc.Hospital,
+                        doc.Degree,
+                        doc.Specialization,
+                        doc.Address,
+                        doc.Id
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading doctors: {ex.Message}");
+            }
         }
     }
 }

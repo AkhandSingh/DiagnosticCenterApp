@@ -12,8 +12,8 @@ namespace AdcData.Repositories
 
         public IEnumerable<PatientDiagnostic> GetPatientsByDoctor(string doctorName)
         {
-            var patientDiagnostic = _context.Patients
-                .Join(_context.Diagnoses,
+            var patientDiagnostic = _context.Patients.AsNoTracking()
+                .Join(_context.Diagnoses.AsNoTracking(),
                     patient => patient.Id,
                     diagnostic => diagnostic.PatientId,
                     (patient, diagnostic) => new { Patient = patient, Diagnostic = diagnostic })
@@ -25,12 +25,13 @@ namespace AdcData.Repositories
 
         public PatientDiagnostic? GetPatientDiagnosticByMobileBumber(long mobileNumber)
         {
-            var patientDiagnostic = _context.Patients
-                .Join(_context.Diagnoses,
+            var patientDiagnostic = _context.Patients.AsNoTracking()
+                .Join(_context.Diagnoses.AsNoTracking(),
                     patient => patient.Id,
                     diagnostic => diagnostic.PatientId,
                     (patient, diagnostic) => new { Patient = patient, Diagnostic = diagnostic })
                 .Where(p => p.Patient.MobileNumber == mobileNumber)
+                .OrderByDescending(p => p.Diagnostic.Id)
                 .FirstOrDefault();
 
             return patientDiagnostic != null

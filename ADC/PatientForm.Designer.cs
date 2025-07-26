@@ -65,6 +65,9 @@
             LblReferredBy = new Label();
             LblIsPregenent = new Label();
             LblDiagnosticSubCat = new Label();
+            BtnSearchByMob = new Button();
+            TxtSearchMobileNumber = new TextBox();
+            LabelSearchByMob = new Label();
             PnlPatient.SuspendLayout();
             PnlDiagnostic.SuspendLayout();
             SuspendLayout();
@@ -89,15 +92,15 @@
             // 
             // TxtMobileNum
             // 
-            TxtMobileNum.Location = new Point(269, 65);
+            TxtMobileNum.Location = new Point(269, 61);
             TxtMobileNum.Name = "TxtMobileNum";
             TxtMobileNum.Size = new Size(234, 27);
-            TxtMobileNum.TabIndex = 23;
+            TxtMobileNum.TabIndex = 1;
             // 
             // LblMobile
             // 
             LblMobile.AutoSize = true;
-            LblMobile.Location = new Point(79, 65);
+            LblMobile.Location = new Point(79, 61);
             LblMobile.Name = "LblMobile";
             LblMobile.Size = new Size(114, 20);
             LblMobile.TabIndex = 22;
@@ -109,21 +112,21 @@
             TxtAddress.Multiline = true;
             TxtAddress.Name = "TxtAddress";
             TxtAddress.Size = new Size(234, 217);
-            TxtAddress.TabIndex = 20;
+            TxtAddress.TabIndex = 6;
             // 
             // TxtGaurdian
             // 
             TxtGaurdian.Location = new Point(269, 194);
             TxtGaurdian.Name = "TxtGaurdian";
             TxtGaurdian.Size = new Size(234, 27);
-            TxtGaurdian.TabIndex = 19;
+            TxtGaurdian.TabIndex = 5;
             // 
             // TxtPatientName
             // 
-            TxtPatientName.Location = new Point(269, 22);
+            TxtPatientName.Location = new Point(269, 14);
             TxtPatientName.Name = "TxtPatientName";
             TxtPatientName.Size = new Size(234, 27);
-            TxtPatientName.TabIndex = 18;
+            TxtPatientName.TabIndex = 2;
             // 
             // LblAddress
             // 
@@ -146,7 +149,7 @@
             // LblName
             // 
             LblName.AutoSize = true;
-            LblName.Location = new Point(79, 22);
+            LblName.Location = new Point(79, 14);
             LblName.Name = "LblName";
             LblName.Size = new Size(98, 20);
             LblName.TabIndex = 15;
@@ -167,7 +170,7 @@
             PnlPatient.Controls.Add(TxtMobileNum);
             PnlPatient.Controls.Add(TxtAddress);
             PnlPatient.Controls.Add(LblMobile);
-            PnlPatient.Location = new Point(63, 46);
+            PnlPatient.Location = new Point(63, 76);
             PnlPatient.Name = "PnlPatient";
             PnlPatient.Size = new Size(596, 482);
             PnlPatient.TabIndex = 28;
@@ -179,7 +182,7 @@
             CmbSex.Location = new Point(269, 151);
             CmbSex.Name = "CmbSex";
             CmbSex.Size = new Size(86, 28);
-            CmbSex.TabIndex = 28;
+            CmbSex.TabIndex = 4;
             // 
             // CmbAge
             // 
@@ -188,14 +191,14 @@
             CmbAge.Location = new Point(269, 109);
             CmbAge.Name = "CmbAge";
             CmbAge.Size = new Size(86, 28);
-            CmbAge.TabIndex = 27;
+            CmbAge.TabIndex = 3;
             // 
             // AddDetails
             // 
-            AddDetails.Location = new Point(1113, 552);
+            AddDetails.Location = new Point(1113, 578);
             AddDetails.Name = "AddDetails";
             AddDetails.Size = new Size(249, 29);
-            AddDetails.TabIndex = 30;
+            AddDetails.TabIndex = 18;
             AddDetails.Text = "Add Details";
             AddDetails.UseVisualStyleBackColor = true;
             AddDetails.Click += AddDetails_Click;
@@ -225,7 +228,7 @@
             PnlDiagnostic.Controls.Add(LblReferredBy);
             PnlDiagnostic.Controls.Add(LblIsPregenent);
             PnlDiagnostic.Controls.Add(LblDiagnosticSubCat);
-            PnlDiagnostic.Location = new Point(766, 46);
+            PnlDiagnostic.Location = new Point(766, 76);
             PnlDiagnostic.Name = "PnlDiagnostic";
             PnlDiagnostic.Size = new Size(596, 482);
             PnlDiagnostic.TabIndex = 31;
@@ -244,14 +247,14 @@
             DtpDiagnosticDate.Location = new Point(274, 14);
             DtpDiagnosticDate.Name = "DtpDiagnosticDate";
             DtpDiagnosticDate.Size = new Size(233, 27);
-            DtpDiagnosticDate.TabIndex = 43;
+            DtpDiagnosticDate.TabIndex = 7;
             // 
             // TxtChildren
             // 
             TxtChildren.Location = new Point(276, 264);
             TxtChildren.Name = "TxtChildren";
             TxtChildren.Size = new Size(234, 27);
-            TxtChildren.TabIndex = 42;
+            TxtChildren.TabIndex = 13;
             // 
             // LblChildren
             // 
@@ -267,7 +270,7 @@
             TxtManager.Location = new Point(276, 423);
             TxtManager.Name = "TxtManager";
             TxtManager.Size = new Size(234, 27);
-            TxtManager.TabIndex = 40;
+            TxtManager.TabIndex = 17;
             // 
             // LblManager
             // 
@@ -283,7 +286,7 @@
             TxtAmount.Location = new Point(276, 387);
             TxtAmount.Name = "TxtAmount";
             TxtAmount.Size = new Size(234, 27);
-            TxtAmount.TabIndex = 38;
+            TxtAmount.TabIndex = 16;
             TxtAmount.Text = "0.00";
             // 
             // LblAmount
@@ -309,7 +312,7 @@
             TxtIndication.Location = new Point(276, 345);
             TxtIndication.Name = "TxtIndication";
             TxtIndication.Size = new Size(234, 27);
-            TxtIndication.TabIndex = 36;
+            TxtIndication.TabIndex = 15;
             TxtIndication.Text = "Normal";
             // 
             // LblIndication
@@ -328,7 +331,7 @@
             CmbSonologist.Location = new Point(276, 303);
             CmbSonologist.Name = "CmbSonologist";
             CmbSonologist.Size = new Size(234, 28);
-            CmbSonologist.TabIndex = 34;
+            CmbSonologist.TabIndex = 14;
             // 
             // LblSonologist
             // 
@@ -346,7 +349,7 @@
             CmbLenOfPregnency.Location = new Point(276, 225);
             CmbLenOfPregnency.Name = "CmbLenOfPregnency";
             CmbLenOfPregnency.Size = new Size(86, 28);
-            CmbLenOfPregnency.TabIndex = 32;
+            CmbLenOfPregnency.TabIndex = 12;
             // 
             // ChkIsPregnent
             // 
@@ -354,7 +357,7 @@
             ChkIsPregnent.Location = new Point(276, 188);
             ChkIsPregnent.Name = "ChkIsPregnent";
             ChkIsPregnent.Size = new Size(18, 17);
-            ChkIsPregnent.TabIndex = 31;
+            ChkIsPregnent.TabIndex = 11;
             ChkIsPregnent.UseVisualStyleBackColor = true;
             // 
             // CmbDiagnosticSubCat
@@ -363,7 +366,8 @@
             CmbDiagnosticSubCat.Location = new Point(274, 96);
             CmbDiagnosticSubCat.Name = "CmbDiagnosticSubCat";
             CmbDiagnosticSubCat.Size = new Size(234, 28);
-            CmbDiagnosticSubCat.TabIndex = 30;
+            CmbDiagnosticSubCat.TabIndex = 9;
+            CmbDiagnosticSubCat.Visible = false;
             // 
             // CmbDiagnostic
             // 
@@ -371,8 +375,9 @@
             CmbDiagnostic.Items.AddRange(new object[] { "USG", "XRAY", "ECG", "PATHOALOGY" });
             CmbDiagnostic.Location = new Point(274, 53);
             CmbDiagnostic.Name = "CmbDiagnostic";
-            CmbDiagnostic.Size = new Size(234, 28);
-            CmbDiagnostic.TabIndex = 29;
+            CmbDiagnostic.Size = new Size(233, 28);
+            CmbDiagnostic.TabIndex = 8;
+            CmbDiagnostic.SelectedIndexChanged += CmbDiagnostic_SelectedIndexChanged;
             // 
             // CmbRefferedBy
             // 
@@ -381,7 +386,7 @@
             CmbRefferedBy.Location = new Point(274, 140);
             CmbRefferedBy.Name = "CmbRefferedBy";
             CmbRefferedBy.Size = new Size(234, 28);
-            CmbRefferedBy.TabIndex = 27;
+            CmbRefferedBy.TabIndex = 10;
             // 
             // LblDiagnosticCategory
             // 
@@ -418,12 +423,43 @@
             LblDiagnosticSubCat.Size = new Size(98, 20);
             LblDiagnosticSubCat.TabIndex = 22;
             LblDiagnosticSubCat.Text = "Sub Category";
+            LblDiagnosticSubCat.Visible = false;
+            // 
+            // BtnSearchByMob
+            // 
+            BtnSearchByMob.Location = new Point(548, 27);
+            BtnSearchByMob.Name = "BtnSearchByMob";
+            BtnSearchByMob.Size = new Size(102, 29);
+            BtnSearchByMob.TabIndex = 34;
+            BtnSearchByMob.Text = "Search";
+            BtnSearchByMob.UseVisualStyleBackColor = true;
+            BtnSearchByMob.Click += BtnSearchByMob_Click;
+            // 
+            // TxtSearchMobileNumber
+            // 
+            TxtSearchMobileNumber.Location = new Point(333, 29);
+            TxtSearchMobileNumber.Name = "TxtSearchMobileNumber";
+            TxtSearchMobileNumber.Size = new Size(209, 27);
+            TxtSearchMobileNumber.TabIndex = 33;
+            // 
+            // LabelSearchByMob
+            // 
+            LabelSearchByMob.AutoSize = true;
+            LabelSearchByMob.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            LabelSearchByMob.Location = new Point(63, 29);
+            LabelSearchByMob.Name = "LabelSearchByMob";
+            LabelSearchByMob.Size = new Size(196, 20);
+            LabelSearchByMob.TabIndex = 32;
+            LabelSearchByMob.Text = "Search By Mobile Number:";
             // 
             // PatientForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1482, 653);
+            Controls.Add(BtnSearchByMob);
+            Controls.Add(TxtSearchMobileNumber);
+            Controls.Add(LabelSearchByMob);
             Controls.Add(PnlDiagnostic);
             Controls.Add(AddDetails);
             Controls.Add(PnlPatient);
@@ -434,6 +470,7 @@
             PnlDiagnostic.ResumeLayout(false);
             PnlDiagnostic.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -474,5 +511,8 @@
         private Label LblChildren;
         private Label LblDiagnosticDate;
         private DateTimePicker DtpDiagnosticDate;
+        private Button BtnSearchByMob;
+        private TextBox TxtSearchMobileNumber;
+        private Label LabelSearchByMob;
     }
 }
