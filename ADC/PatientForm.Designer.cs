@@ -48,14 +48,14 @@
             TxtChildren = new TextBox();
             LblChildren = new Label();
             TxtManager = new TextBox();
-            LblManager = new Label();
-            TxtAmount = new TextBox();
-            LblAmount = new Label();
             LblLenOfPregnency = new Label();
             TxtIndication = new TextBox();
+            LblManager = new Label();
             LblIndication = new Label();
             CmbSonologist = new ComboBox();
+            TxtAmount = new TextBox();
             LblSonologist = new Label();
+            LblAmount = new Label();
             CmbLenOfPregnency = new ComboBox();
             ChkIsPregnent = new CheckBox();
             CmbDiagnosticSubCat = new ComboBox();
@@ -95,7 +95,7 @@
             TxtMobileNum.Location = new Point(269, 61);
             TxtMobileNum.Name = "TxtMobileNum";
             TxtMobileNum.Size = new Size(234, 27);
-            TxtMobileNum.TabIndex = 1;
+            TxtMobileNum.TabIndex = 2;
             // 
             // LblMobile
             // 
@@ -126,7 +126,7 @@
             TxtPatientName.Location = new Point(269, 14);
             TxtPatientName.Name = "TxtPatientName";
             TxtPatientName.Size = new Size(234, 27);
-            TxtPatientName.TabIndex = 2;
+            TxtPatientName.TabIndex = 1;
             // 
             // LblAddress
             // 
@@ -211,14 +211,14 @@
             PnlDiagnostic.Controls.Add(TxtChildren);
             PnlDiagnostic.Controls.Add(LblChildren);
             PnlDiagnostic.Controls.Add(TxtManager);
-            PnlDiagnostic.Controls.Add(LblManager);
-            PnlDiagnostic.Controls.Add(TxtAmount);
-            PnlDiagnostic.Controls.Add(LblAmount);
             PnlDiagnostic.Controls.Add(LblLenOfPregnency);
             PnlDiagnostic.Controls.Add(TxtIndication);
+            PnlDiagnostic.Controls.Add(LblManager);
             PnlDiagnostic.Controls.Add(LblIndication);
             PnlDiagnostic.Controls.Add(CmbSonologist);
+            PnlDiagnostic.Controls.Add(TxtAmount);
             PnlDiagnostic.Controls.Add(LblSonologist);
+            PnlDiagnostic.Controls.Add(LblAmount);
             PnlDiagnostic.Controls.Add(CmbLenOfPregnency);
             PnlDiagnostic.Controls.Add(ChkIsPregnent);
             PnlDiagnostic.Controls.Add(CmbDiagnosticSubCat);
@@ -251,74 +251,60 @@
             // 
             // TxtChildren
             // 
-            TxtChildren.Location = new Point(276, 264);
+            TxtChildren.Location = new Point(276, 384);
             TxtChildren.Name = "TxtChildren";
             TxtChildren.Size = new Size(234, 27);
-            TxtChildren.TabIndex = 13;
+            TxtChildren.TabIndex = 16;
+            TxtChildren.Visible = false;
             // 
             // LblChildren
             // 
             LblChildren.AutoSize = true;
-            LblChildren.Location = new Point(79, 267);
+            LblChildren.Location = new Point(79, 387);
             LblChildren.Name = "LblChildren";
             LblChildren.Size = new Size(126, 20);
             LblChildren.TabIndex = 41;
             LblChildren.Text = "Children With Sex";
+            LblChildren.Visible = false;
             // 
             // TxtManager
             // 
-            TxtManager.Location = new Point(276, 423);
+            TxtManager.Location = new Point(276, 259);
             TxtManager.Name = "TxtManager";
             TxtManager.Size = new Size(234, 27);
-            TxtManager.TabIndex = 17;
+            TxtManager.TabIndex = 13;
+            // 
+            // LblLenOfPregnency
+            // 
+            LblLenOfPregnency.AutoSize = true;
+            LblLenOfPregnency.Location = new Point(79, 345);
+            LblLenOfPregnency.Name = "LblLenOfPregnency";
+            LblLenOfPregnency.Size = new Size(152, 20);
+            LblLenOfPregnency.TabIndex = 16;
+            LblLenOfPregnency.Text = "Length of Pregenency";
+            LblLenOfPregnency.Visible = false;
+            // 
+            // TxtIndication
+            // 
+            TxtIndication.Location = new Point(276, 181);
+            TxtIndication.Name = "TxtIndication";
+            TxtIndication.Size = new Size(234, 27);
+            TxtIndication.TabIndex = 11;
+            TxtIndication.Text = "Normal";
             // 
             // LblManager
             // 
             LblManager.AutoSize = true;
-            LblManager.Location = new Point(79, 423);
+            LblManager.Location = new Point(79, 259);
             LblManager.Name = "LblManager";
             LblManager.Size = new Size(68, 20);
             LblManager.TabIndex = 39;
             LblManager.Text = "Manager";
             // 
-            // TxtAmount
-            // 
-            TxtAmount.Location = new Point(276, 387);
-            TxtAmount.Name = "TxtAmount";
-            TxtAmount.Size = new Size(234, 27);
-            TxtAmount.TabIndex = 16;
-            TxtAmount.Text = "0.00";
-            // 
-            // LblAmount
-            // 
-            LblAmount.AutoSize = true;
-            LblAmount.Location = new Point(79, 387);
-            LblAmount.Name = "LblAmount";
-            LblAmount.Size = new Size(62, 20);
-            LblAmount.TabIndex = 37;
-            LblAmount.Text = "Amount";
-            // 
-            // LblLenOfPregnency
-            // 
-            LblLenOfPregnency.AutoSize = true;
-            LblLenOfPregnency.Location = new Point(79, 225);
-            LblLenOfPregnency.Name = "LblLenOfPregnency";
-            LblLenOfPregnency.Size = new Size(152, 20);
-            LblLenOfPregnency.TabIndex = 16;
-            LblLenOfPregnency.Text = "Length of Pregenency";
-            // 
-            // TxtIndication
-            // 
-            TxtIndication.Location = new Point(276, 345);
-            TxtIndication.Name = "TxtIndication";
-            TxtIndication.Size = new Size(234, 27);
-            TxtIndication.TabIndex = 15;
-            TxtIndication.Text = "Normal";
-            // 
             // LblIndication
             // 
             LblIndication.AutoSize = true;
-            LblIndication.Location = new Point(79, 345);
+            LblIndication.Location = new Point(79, 181);
             LblIndication.Name = "LblIndication";
             LblIndication.Size = new Size(75, 20);
             LblIndication.TabIndex = 35;
@@ -328,37 +314,58 @@
             // 
             CmbSonologist.FormattingEnabled = true;
             CmbSonologist.Items.AddRange(new object[] { "Self" });
-            CmbSonologist.Location = new Point(276, 303);
+            CmbSonologist.Location = new Point(276, 423);
             CmbSonologist.Name = "CmbSonologist";
             CmbSonologist.Size = new Size(234, 28);
-            CmbSonologist.TabIndex = 14;
+            CmbSonologist.TabIndex = 17;
+            CmbSonologist.Visible = false;
+            // 
+            // TxtAmount
+            // 
+            TxtAmount.Location = new Point(276, 223);
+            TxtAmount.Name = "TxtAmount";
+            TxtAmount.Size = new Size(234, 27);
+            TxtAmount.TabIndex = 12;
+            TxtAmount.Text = "0.00";
             // 
             // LblSonologist
             // 
             LblSonologist.AutoSize = true;
-            LblSonologist.Location = new Point(79, 303);
+            LblSonologist.Location = new Point(79, 423);
             LblSonologist.Name = "LblSonologist";
             LblSonologist.Size = new Size(80, 20);
             LblSonologist.TabIndex = 33;
             LblSonologist.Text = "Sonologist";
+            LblSonologist.Visible = false;
+            // 
+            // LblAmount
+            // 
+            LblAmount.AutoSize = true;
+            LblAmount.Location = new Point(79, 223);
+            LblAmount.Name = "LblAmount";
+            LblAmount.Size = new Size(62, 20);
+            LblAmount.TabIndex = 37;
+            LblAmount.Text = "Amount";
             // 
             // CmbLenOfPregnency
             // 
             CmbLenOfPregnency.FormattingEnabled = true;
             CmbLenOfPregnency.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
-            CmbLenOfPregnency.Location = new Point(276, 225);
+            CmbLenOfPregnency.Location = new Point(276, 345);
             CmbLenOfPregnency.Name = "CmbLenOfPregnency";
             CmbLenOfPregnency.Size = new Size(86, 28);
-            CmbLenOfPregnency.TabIndex = 12;
+            CmbLenOfPregnency.TabIndex = 15;
+            CmbLenOfPregnency.Visible = false;
             // 
             // ChkIsPregnent
             // 
             ChkIsPregnent.AutoSize = true;
-            ChkIsPregnent.Location = new Point(276, 188);
+            ChkIsPregnent.Location = new Point(276, 308);
             ChkIsPregnent.Name = "ChkIsPregnent";
             ChkIsPregnent.Size = new Size(18, 17);
-            ChkIsPregnent.TabIndex = 11;
+            ChkIsPregnent.TabIndex = 14;
             ChkIsPregnent.UseVisualStyleBackColor = true;
+            ChkIsPregnent.CheckedChanged += ChkIsPregnent_CheckedChanged;
             // 
             // CmbDiagnosticSubCat
             // 
@@ -409,7 +416,7 @@
             // LblIsPregenent
             // 
             LblIsPregenent.AutoSize = true;
-            LblIsPregenent.Location = new Point(79, 182);
+            LblIsPregenent.Location = new Point(79, 302);
             LblIsPregenent.Name = "LblIsPregenent";
             LblIsPregenent.Size = new Size(82, 20);
             LblIsPregenent.TabIndex = 24;

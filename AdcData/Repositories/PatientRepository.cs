@@ -12,7 +12,7 @@ namespace AdcData.Repositories
 
         public IEnumerable<PatientDiagnostic> GetPatientsByDoctor(string doctorName)
         {
-            var patientDiagnostic = _context.Patients.AsNoTracking()
+            var patientDiagnostics = _context.Patients.AsNoTracking()
                 .Join(_context.Diagnoses.AsNoTracking(),
                     patient => patient.Id,
                     diagnostic => diagnostic.PatientId,
@@ -20,7 +20,9 @@ namespace AdcData.Repositories
                 .Where(p => p.Diagnostic.ReferredBy == doctorName)
                 .ToList();
 
-            return patientDiagnostic.Select(pd => new PatientDiagnostic { Patient = pd.Patient, Diagnostic = pd.Diagnostic });
+            return patientDiagnostics != null
+                ? patientDiagnostics.Select(pd => new PatientDiagnostic { Patient = pd.Patient, Diagnostic = pd.Diagnostic }).ToList()
+                : [];
         }
 
         public PatientDiagnostic? GetPatientDiagnosticByMobileBumber(long mobileNumber)
@@ -44,6 +46,25 @@ namespace AdcData.Repositories
           return  _context.Patients
                 .AsNoTracking()
                 .FirstOrDefault(p => p.MobileNumber == mobileNumber);
+        }
+
+        public IEnumerable<PatientDiagnostic> GetPatientDiagnostic(DateTime startDate, DateTime endDate, string? doctorName)
+        {
+            var patientDiagnostics = _context.Patients.AsNoTracking()
+               .Join(_context.Diagnoses.AsNoTracking(),
+                   patient => patient.Id,
+                   diagnostic => diagnostic.PatientId,
+                   (patient, diagnostic) => new { Patient = patient, Diagnostic = diagnostic })
+               .Where(p => p.Diagnostic.DiagnosticDate >= startDate && p.Diagnostic.DiagnosticDate <= endDate);
+
+            if (!string.IsNullOrEmpty(doctorName))
+            {
+                patientDiagnostics = patientDiagnostics.Where(p => p.Diagnostic.ReferredBy == doctorName);
+            }
+
+            return patientDiagnostics != null
+                ? patientDiagnostics.Select(pd => new PatientDiagnostic { Patient = pd.Patient, Diagnostic = pd.Diagnostic }).ToList()
+                : [];
         }
     }
 }

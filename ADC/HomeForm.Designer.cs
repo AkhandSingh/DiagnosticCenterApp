@@ -34,6 +34,7 @@
             ToolStripPrintPatientReceipt = new ToolStripButton();
             HomePanel = new Panel();
             LblHomeMainText = new Label();
+            ToolStripPrintMontlyPatientReport = new ToolStripButton();
             ToolStripHome.SuspendLayout();
             HomePanel.SuspendLayout();
             SuspendLayout();
@@ -44,7 +45,7 @@
             ToolStripHome.BackColor = SystemColors.GradientInactiveCaption;
             ToolStripHome.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             ToolStripHome.ImageScalingSize = new Size(20, 20);
-            ToolStripHome.Items.AddRange(new ToolStripItem[] { ToolStripDoctor, toolStripButton1, ToolStripPrintPatientReceipt });
+            ToolStripHome.Items.AddRange(new ToolStripItem[] { ToolStripDoctor, toolStripButton1, ToolStripPrintPatientReceipt, ToolStripPrintMontlyPatientReport });
             ToolStripHome.Location = new Point(0, 0);
             ToolStripHome.Name = "ToolStripHome";
             ToolStripHome.Size = new Size(1482, 50);
@@ -99,6 +100,15 @@
             LblHomeMainText.TabIndex = 0;
             LblHomeMainText.Text = "ARUSHI DIAGNOSTIC CENTRE";
             // 
+            // ToolStripPrintMontlyPatientReport
+            // 
+            ToolStripPrintMontlyPatientReport.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            ToolStripPrintMontlyPatientReport.ImageTransparentColor = Color.Magenta;
+            ToolStripPrintMontlyPatientReport.Name = "ToolStripPrintMontlyPatientReport";
+            ToolStripPrintMontlyPatientReport.Size = new Size(207, 47);
+            ToolStripPrintMontlyPatientReport.Text = "Print Montly Patient Report";
+            ToolStripPrintMontlyPatientReport.Click += ToolStripPrintMontlyPatientReport_Click;
+            // 
             // HomeForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -127,5 +137,6 @@
         private Label LblHomeMainText;
         private ToolStripButton ToolStripPrintPatientReceipt;
         private ToolStripButton toolStripButton1;
+        private ToolStripButton ToolStripPrintMontlyPatientReport;
     }
 }

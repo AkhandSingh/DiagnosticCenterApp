@@ -10,7 +10,6 @@ namespace ADC
     {
         AdcDbContext _context;
         IPatientRepository _patientRepository;
-        IDiagnosticRepository _diagnosticRepository;
         PatientDiagnostic _patientDiagnostic;
 
         public Receipt()
@@ -38,6 +37,7 @@ namespace ADC
                 printDoc.PrinterSettings.PrintFileName = @"C:\DiagnosticReports\receipt.pdf";
 
                 printDoc.Print();
+
             }
             catch (Exception ex)
             {
@@ -55,7 +55,6 @@ namespace ADC
             Font headerFont = new Font("Arial", 16, FontStyle.Bold);
             Font normalFont = new Font("Arial", 10);
             int rowHeight = 40;
-
 
             // Draw header text
             e.Graphics.DrawString("ARUSHI DIAGNOSTIC CENTER", headerFont, Brushes.Black, margin + 200, top + 30);
@@ -85,14 +84,31 @@ namespace ADC
                 e.Graphics.DrawString($"PT ADD: {patientDiagnostic.Patient?.Address ?? string.Empty}", normalFont, Brushes.Black, margin + 250, top);
 
                 top += rowHeight;
-                e.Graphics.DrawString($"USG: {(diagnosticCategory == "USG" ? diagnosticSubCategory : string.Empty)}", normalFont, Brushes.Black, margin, top);
-                //e.Graphics.DrawString($"COLOR DOPPLER: ", normalFont, Brushes.Black, margin + 250, top);
-                e.Graphics.DrawString($"XRAY: {(diagnosticCategory == "XRAY" ? "XRAY" : string.Empty)}", normalFont, Brushes.Black, margin + 250, top);
-                e.Graphics.DrawString($"E.C.G.: {(diagnosticCategory == "ECG" ? "E.C.G" : string.Empty)}", normalFont, Brushes.Black, margin + 500, top);
+
+                // Draw XRAY checkbox
+                int checkBoxX = margin + 300;
+                int checkBoxY = top;
+                int checkBoxSize = 14;
                 
-                //top += rowHeight;
-                //e.Graphics.DrawString($"XRAY: {(diagnosticCategory == "XRAY" ? "XRAY" : string.Empty)}", normalFont, Brushes.Black, margin, top);
-                //e.Graphics.DrawString($"E.C.G.: {(diagnosticCategory == "ECG" ? "E.C.G" : string.Empty)}", normalFont, Brushes.Black, margin + 250, top);
+                // Draw label
+                e.Graphics.DrawString("XRAY:", normalFont, Brushes.Black, margin + 250, checkBoxY - 2);
+
+                // Draw checkbox rectangle
+                e.Graphics.DrawRectangle(Pens.Black, checkBoxX, checkBoxY, checkBoxSize, checkBoxSize);
+
+                // If diagnosticCategory is XRAY, draw tick
+                if (diagnosticCategory == "XRAY")
+                {
+                    // Draw a tick mark inside the checkbox
+                    Pen tickPen = new Pen(Color.Black, 2);
+                    e.Graphics.DrawLine(tickPen, checkBoxX + 3, checkBoxY + checkBoxSize / 2, checkBoxX + checkBoxSize / 2, checkBoxY + checkBoxSize - 3);
+                    e.Graphics.DrawLine(tickPen, checkBoxX + checkBoxSize / 2, checkBoxY + checkBoxSize - 3, checkBoxX + checkBoxSize - 3, checkBoxY + 3);
+                    tickPen.Dispose();
+                }
+
+                // USG and ECG as before
+                e.Graphics.DrawString($"USG: {(diagnosticCategory == "USG" ? diagnosticSubCategory : string.Empty)}", normalFont, Brushes.Black, margin, top);
+                e.Graphics.DrawString($"E.C.G.: {(diagnosticCategory == "ECG" ? "E.C.G" : string.Empty)}", normalFont, Brushes.Black, margin + 500, top);
 
                 top += rowHeight;
                 e.Graphics.DrawString($"AMOUNT: {patientDiagnostic.Diagnostic.Amount}", normalFont, Brushes.Black, margin, top);
@@ -100,6 +116,8 @@ namespace ADC
             }
 
             e.HasMorePages = false;
+
+            MessageBox.Show("Printing completed successfully.", "Print Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Receipt_Load(object sender, EventArgs e)
@@ -111,6 +129,7 @@ namespace ADC
         {
             LblAge.Text = string.Empty;
             LblAmount.Text = string.Empty;
+            LblDignosticDate.Text = string.Empty;
             LblEcg.Text = string.Empty;
             LblManager.Text = string.Empty;
             LblMobileNum.Text = string.Empty;
@@ -138,6 +157,7 @@ namespace ADC
 
                 if (_patientDiagnostic.Diagnostic != null)
                 {
+                    LblDignosticDate.Text = _patientDiagnostic.Diagnostic.DiagnosticDate.ToString("dd/MM/yyyy");
                     LblReferredBy.Text = _patientDiagnostic.Diagnostic.ReferredBy;
                     LblUsg.Text = _patientDiagnostic.Diagnostic.DiagnosticCategory == "USG" ? _patientDiagnostic.Diagnostic.DiagnosticSubCategory : string.Empty;
                     LblXray.Text = _patientDiagnostic.Diagnostic.DiagnosticCategory == "XRAY" ? "XRAY" : string.Empty;
@@ -145,9 +165,12 @@ namespace ADC
                     LblAmount.Text = _patientDiagnostic.Diagnostic.Amount.ToString();
                     LblManager.Text = _patientDiagnostic.Diagnostic.Manager;
                 }
+
+                BtnPrint.Enabled = true;
             }
             else
             {
+                BtnPrint.Enabled = false;
                 MessageBox.Show("No patient found with the provided mobile number.");
                 ClearLabes();
             }

@@ -28,5 +28,12 @@ namespace ADC
             Receipt receiptForm = new Receipt();
             receiptForm.Show();
         }
+
+        private void ToolStripPrintMontlyPatientReport_Click(object sender, EventArgs e)
+        {
+            MonthlyPatientReports monthlyPatientReports = new MonthlyPatientReports();
+            monthlyPatientReports.Show();
+
+        }
     }
 }

@@ -25,5 +25,14 @@ namespace AdcData.Interfaces
         /// <param name="mobileNumber"></param>
         /// <returns></returns>
         Patient? GetPatientByMobileNumber(long mobileNumber);
+
+        /// <summary>
+        /// Gets a list of patients along with their diagnostics by the doctor's name, start and end date.
+        /// </summary>
+        /// <param name="startDate">Start Date</param>
+        /// <param name="endDate">Start Date</param>
+        /// <param name="doctorName"></param>
+        /// <returns></returns>
+        IEnumerable<PatientDiagnostic> GetPatientDiagnostic(DateTime startDate, DateTime endDate, string? doctorName);
     }
 }

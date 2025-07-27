@@ -73,17 +73,17 @@ namespace ADC
                 Diagnostic diagnostic = new Diagnostic
                 {
                     ReferredBy = CmbRefferedBy.Text.ToString(),
-                    Sonologist = CmbSonologist.Text.ToString(),
                     PatientId = patientId,
-                    IsPregnent = ChkIsPregnent.Checked,
-                    LengthOfPregnency = lengthOfPregnancy,
-                    ChildrenWithSex = TxtChildren.Text,
                     DiagnosticCategory = CmbDiagnostic.Text,
-                    DiagnosticSubCategory = CmbDiagnosticSubCat.Text,
+                    DiagnosticSubCategory = string.IsNullOrWhiteSpace(CmbDiagnosticSubCat.Text) ? null : CmbDiagnosticSubCat.Text,
                     DiagnosticDate = DtpDiagnosticDate.Value,
                     Indication = TxtIndication.Text,
                     Amount = amount,
-                    Manager = TxtManager.Text
+                    Manager = string.IsNullOrWhiteSpace(TxtManager.Text) ? null : TxtManager.Text,
+                    IsPregnent = ChkIsPregnent.Checked,
+                    LengthOfPregnency = string.IsNullOrWhiteSpace(CmbLenOfPregnency.Text) ? null : lengthOfPregnancy,
+                    ChildrenWithSex = string.IsNullOrWhiteSpace(TxtChildren.Text) ? null: TxtChildren.Text,
+                    Sonologist = (!ChkIsPregnent.Checked || string.IsNullOrWhiteSpace(CmbSonologist.Text)) ? null : CmbSonologist.Text.ToString(),
                 };
 
                 _diagnosticRepository.Add(diagnostic);
@@ -101,6 +101,7 @@ namespace ADC
 
         private void ClearFields()
         {
+            TxtGaurdian.Clear();
             TxtPatientName.Clear();
             TxtMobileNum.Clear();
             TxtAddress.Clear();
@@ -108,6 +109,28 @@ namespace ADC
             CmbSex.SelectedItem = null;
             TxtAddress.Clear();
             TxtMobileNum.Clear();
+
+            //Clear diagnostic fields
+            DtpDiagnosticDate.Value = DateTime.Now;
+            CmbDiagnostic.SelectedItem = null;
+            CmbDiagnosticSubCat.Visible = false;
+            CmbDiagnosticSubCat.SelectedItem = null;
+            CmbDiagnosticSubCat.DataSource = null;
+            CmbRefferedBy.SelectedIndex = 0;
+            TxtIndication.Text = "Normal";
+            TxtAmount.Text = "0.00";
+            TxtManager.Clear();
+            ChkIsPregnent.Checked = false;
+
+            LblLenOfPregnency.Visible = false;
+            CmbLenOfPregnency.Visible = false;
+            LblChildren.Visible = false;
+            TxtChildren.Visible = false;
+            LblSonologist.Visible = false;
+            CmbSonologist.Visible = false;
+            CmbSonologist.SelectedIndex = 0;
+            CmbLenOfPregnency.SelectedItem = null;
+            TxtChildren.Clear();
         }
 
         private void SetDoctors()
@@ -136,6 +159,13 @@ namespace ADC
         {
             try
             {
+               
+                if (string.IsNullOrWhiteSpace(TxtSearchMobileNumber.Text) || TxtSearchMobileNumber.Text.Length < 10)
+                {
+                    MessageBox.Show("Please enter a valid mobile number to search.");
+                    return;
+                }
+
                 long mobileNumber;
                 long.TryParse(TxtSearchMobileNumber.Text, out mobileNumber);
 
@@ -150,6 +180,11 @@ namespace ADC
                         TxtAddress.Text = patient.Address;
                         TxtGaurdian.Text = patient.Gaurdian;
                         TxtMobileNum.Text = patient.MobileNumber.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No patient found with the provided mobile number. Please add the patient details");
+                        ClearFields();
                     }
                 }
                 else
@@ -196,6 +231,16 @@ namespace ADC
                 CmbDiagnosticSubCat.Visible = false;
                 CmbDiagnosticSubCat.DataSource = null;
             }
+        }
+
+        private void ChkIsPregnent_CheckedChanged(object sender, EventArgs e)
+        {
+            LblLenOfPregnency.Visible = ChkIsPregnent.Checked;
+            CmbLenOfPregnency.Visible = ChkIsPregnent.Checked;
+            LblChildren.Visible = ChkIsPregnent.Checked;
+            TxtChildren.Visible = ChkIsPregnent.Checked;
+            LblSonologist.Visible = ChkIsPregnent.Checked;
+            CmbSonologist.Visible = ChkIsPregnent.Checked;
         }
     }
 }

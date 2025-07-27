@@ -1,102 +1,91 @@
-﻿using System.Drawing.Printing;
+﻿using AdcData;
+using AdcData.Interfaces;
+using AdcData.Models;
+using AdcData.Repositories;
+using System.Drawing.Printing;
 
 namespace ADC
 {
     public partial class MonthlyPatientReports : Form
     {
-        private DataGridView dataGridView1;
-        private Button btnPrint;
+        AdcDbContext _context;
+        IPatientRepository _patientRepository;
+        IEnumerable<PatientDiagnostic> _patientDiagnostics;
         private int currentRow = 0;
-        private Image logo;
 
         public MonthlyPatientReports()
         {
             InitializeComponent();
 
-            dataGridView1 = new DataGridView
-            {
-                Location = new Point(20, 20),
-                Size = new Size(600, 200),
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-            };
-            Controls.Add(dataGridView1);
+            _context = new AdcDbContext();
+            _patientRepository = new PatientRepository(_context);
 
-            btnPrint = new Button
-            {
-                Text = "Print to PDF",
-                Location = new Point(20, 240)
-            };
-            btnPrint.Click += BtnPrint_Click;
-            Controls.Add(btnPrint);
-
-            LoadData();
-
-            // Load logo (make sure the file exists!)
-            //logo = Image.FromFile("logo.png");
+            DtpStartDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            DtpEndDate.Value = DateTime.Now;
         }
 
-        private void LoadData()
-        {
-            dataGridView1.Columns.Add("Id", "ID");
-            dataGridView1.Columns.Add("Name", "Name");
-            dataGridView1.Columns.Add("Email", "Email");
-            dataGridView1.Columns.Add("Id", "ID");
-            dataGridView1.Columns.Add("Name", "Name");
-            dataGridView1.Columns.Add("Email", "Email");
-
-
-            for (int i = 1; i <= 100; i++)
-            {
-                dataGridView1.Rows.Add(i, $"User {i}", $"user{i}@example.com", i, $"User {i}", $"user{i}@example.com");
-            }
-        }
+       
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {
+            if (DtvMonthlyPatientReport.Rows.Count == 0)
+            {
+                MessageBox.Show("No data to print. Please search for patient diagnostics first.");
+                return;
+            }
+
             currentRow = 0;
 
+            // Create a PrintDocument object
             PrintDocument printDoc = new PrintDocument();
             printDoc.PrintPage += PrintDoc_PrintPage;
-            printDoc.DefaultPageSettings.Landscape = true;
 
+            // Set the printer to "Microsoft Print to PDF" and output file
             printDoc.PrinterSettings.PrinterName = "Microsoft Print to PDF";
             printDoc.PrinterSettings.PrintToFile = true;
-            printDoc.PrinterSettings.PrintFileName = @"C:\Users\Public\DataGridView_Report.pdf";
+            printDoc.PrinterSettings.PrintFileName = @"C:\DiagnosticReports\MonthlyPatientReports.pdf";
 
             printDoc.Print();
         }
 
         private void PrintDoc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            int margin = 50;
+            int margin = 30;
             int top = margin;
 
-            Font headerFont = new Font("Arial", 16, FontStyle.Bold);
+            Font headerFont = new Font("Arial", 24, FontStyle.Bold);
             Font normalFont = new Font("Arial", 10);
             int rowHeight = 30;
 
-            // Draw logo
-            if (logo != null)
-            {
-                e.Graphics.DrawImage(logo, margin, top, 100, 100);
-            }
-
             // Draw header text
-            e.Graphics.DrawString("Employee Report", headerFont, Brushes.Black, margin + 120, top + 30);
-            top += 120;
+            e.Graphics.DrawString("ARUSHI DIAGNOSTIC CENTER", headerFont, Brushes.Black, margin + 150, top + 30);
+            top += 80;
+            e.Graphics.DrawString("KARMA, KARCHHANA, PRAYAGRAJ  MO. NO. 8953313751", normalFont, Brushes.Black, margin + 230, top);
+
+            top += 50;
 
             // Draw column headers
             int colLeft = margin;
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
+            Pen borderPen = Pens.Black;
+
+            // Add extra column for serial number
+            e.Graphics.DrawString("SR.NO.", normalFont, Brushes.Black, colLeft + 2, top + 5);
+            e.Graphics.DrawRectangle(borderPen, colLeft, top, 60, rowHeight);
+
+            colLeft += 60;
+            foreach (DataGridViewColumn col in DtvMonthlyPatientReport.Columns)
             {
-                e.Graphics.DrawString(col.HeaderText, normalFont, Brushes.Black, colLeft, top);
+                // Draw header text
+                e.Graphics.DrawString(col.HeaderText, normalFont, Brushes.Black, colLeft + 2, top + 5);
+                // Draw header cell border
+                e.Graphics.DrawRectangle(borderPen, colLeft, top, col.Width, rowHeight);
                 colLeft += col.Width;
             }
 
             top += rowHeight;
 
             // Draw rows
-            while (currentRow < dataGridView1.Rows.Count)
+            while (currentRow < DtvMonthlyPatientReport.Rows.Count-1)
             {
                 if (top + rowHeight > e.MarginBounds.Bottom)
                 {
@@ -105,9 +94,19 @@ namespace ADC
                 }
 
                 colLeft = margin;
-                foreach (DataGridViewCell cell in dataGridView1.Rows[currentRow].Cells)
+
+                // Add extra column for serial number
+                e.Graphics.DrawString((currentRow+1).ToString(), normalFont, Brushes.Black, colLeft + 2, top + 5);
+                e.Graphics.DrawRectangle(borderPen, colLeft, top, 60, rowHeight);
+
+                colLeft += 60;
+
+                foreach (DataGridViewCell cell in DtvMonthlyPatientReport.Rows[currentRow].Cells)
                 {
-                    e.Graphics.DrawString(Convert.ToString(cell.Value), normalFont, Brushes.Black, colLeft, top);
+                    // Draw cell text
+                    e.Graphics.DrawString(Convert.ToString(cell.Value), normalFont, Brushes.Black, colLeft + 2, top + 5);
+                    // Draw cell border
+                    e.Graphics.DrawRectangle(borderPen, colLeft, top, cell.OwningColumn.Width, rowHeight);
                     colLeft += cell.OwningColumn.Width;
                 }
 
@@ -116,6 +115,45 @@ namespace ADC
             }
 
             e.HasMorePages = false;
+
+            MessageBox.Show("Printing completed successfully.", "Print Status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = DtpStartDate.Value.Date;
+            DateTime endDate = DtpEndDate.Value.Date;
+            string doctorName = string.IsNullOrWhiteSpace(TxtDoctor.Text)? null : TxtDoctor.Text;
+            _patientDiagnostics = _patientRepository.GetPatientDiagnostic(startDate,endDate.Date.AddDays(1),doctorName);
+
+            if (_patientDiagnostics != null)
+            {
+                BtnPrint.Enabled = _patientDiagnostics.Any();
+                DtvMonthlyPatientReport.Rows.Clear();
+
+                foreach (var patientDiagnostic in _patientDiagnostics)
+                {
+                    DtvMonthlyPatientReport.Rows.Add(
+                        patientDiagnostic.Diagnostic.DiagnosticDate.ToString("dd/MM/yyyy"),
+                        patientDiagnostic.Diagnostic.ReferredBy,
+                        patientDiagnostic.Patient.Name,
+                        patientDiagnostic.Diagnostic.DiagnosticCategory,
+                        patientDiagnostic.Diagnostic.Amount
+                    );
+                }
+            }
+            else
+            {
+                BtnPrint.Enabled = false;
+            }
+
+            
+            DtvMonthlyPatientReport.Columns["DiagnosticDate"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            DtvMonthlyPatientReport.Columns["DiagnosticDate"].Width = 100;
+
+            DtvMonthlyPatientReport.Columns["Amount"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            DtvMonthlyPatientReport.Columns["Amount"].Width = 100;
+
         }
     }
 }

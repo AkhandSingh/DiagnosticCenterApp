@@ -58,6 +58,8 @@
             TxtMobileNumber = new TextBox();
             BtnSearchByMob = new Button();
             panel1 = new Panel();
+            LblDignosticDate = new Label();
+            LblDignosticDateTitle = new Label();
             SuspendLayout();
             // 
             // lblCenterHeading
@@ -299,6 +301,7 @@
             // 
             // BtnPrint
             // 
+            BtnPrint.Enabled = false;
             BtnPrint.Location = new Point(843, 62);
             BtnPrint.Name = "BtnPrint";
             BtnPrint.Size = new Size(102, 29);
@@ -332,12 +335,32 @@
             panel1.Size = new Size(931, 83);
             panel1.TabIndex = 31;
             // 
+            // LblDignosticDate
+            // 
+            LblDignosticDate.AutoSize = true;
+            LblDignosticDate.Location = new Point(876, 262);
+            LblDignosticDate.Name = "LblDignosticDate";
+            LblDignosticDate.Size = new Size(50, 20);
+            LblDignosticDate.TabIndex = 33;
+            LblDignosticDate.Text = "label0";
+            // 
+            // LblDignosticDateTitle
+            // 
+            LblDignosticDateTitle.AutoSize = true;
+            LblDignosticDateTitle.Location = new Point(826, 262);
+            LblDignosticDateTitle.Name = "LblDignosticDateTitle";
+            LblDignosticDateTitle.Size = new Size(44, 20);
+            LblDignosticDateTitle.TabIndex = 32;
+            LblDignosticDateTitle.Text = "Date:";
+            // 
             // Receipt
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1025, 581);
+            Controls.Add(LblDignosticDate);
+            Controls.Add(LblDignosticDateTitle);
             Controls.Add(BtnSearchByMob);
             Controls.Add(TxtMobileNumber);
             Controls.Add(BtnPrint);
@@ -407,5 +430,7 @@
         private TextBox TxtMobileNumber;
         private Button BtnSearchByMob;
         private Panel panel1;
+        private Label LblDignosticDate;
+        private Label LblDignosticDateTitle;
     }
 }
