@@ -8,7 +8,7 @@ namespace AdcData.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; } = null!;
-        public int? MobileNo { get; set; }
+        public long? MobileNo { get; set; }
         public string? Degree { get; set; }
         public string? Specialization { get; set; }
         public string? Address { get; set; }

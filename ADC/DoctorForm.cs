@@ -34,14 +34,14 @@ namespace ADC
                     return;
                 }
 
-                int mobileNo;
-                bool isMoNumParsed = int.TryParse(TxtMobileNum.Text, out mobileNo);
+                long mobileNo;
+                bool isMoNumParsed = long.TryParse(TxtMobileNum.Text, out mobileNo);
                 Doctor doctor = new Doctor
                 {
                     Name = TxtDoctorName.Text,
-                    MobileNo = isMoNumParsed ? Convert.ToInt32(TxtMobileNum.Text) : null,
+                    MobileNo = isMoNumParsed ? Convert.ToInt64(TxtMobileNum.Text) : null,
                     Degree = string.IsNullOrEmpty(TxtDegree.Text)? null: TxtDegree.Text,
-                    Specialization = string.IsNullOrEmpty(TxtMobileNum.Text) ? null : TxtMobileNum.Text,
+                    Specialization = string.IsNullOrEmpty(TxtSpecialization.Text) ? null : TxtSpecialization.Text,
                     Address = string.IsNullOrEmpty(TxtAddress.Text) ? null : TxtAddress.Text,
                     Hospital = string.IsNullOrEmpty(TxtHospital.Text) ? null : TxtHospital.Text
                 };

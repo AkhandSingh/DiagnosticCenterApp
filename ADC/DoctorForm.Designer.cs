@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DoctorForm));
             LblName = new Label();
             LblHospital = new Label();
             LblAddress = new Label();
@@ -59,57 +60,61 @@
             // LblName
             // 
             LblName.AutoSize = true;
-            LblName.Location = new Point(44, 39);
+            LblName.Location = new Point(10, 22);
             LblName.Name = "LblName";
-            LblName.Size = new Size(99, 20);
+            LblName.Size = new Size(78, 15);
             LblName.TabIndex = 0;
             LblName.Text = "Doctor Name";
             // 
             // LblHospital
             // 
             LblHospital.AutoSize = true;
-            LblHospital.Location = new Point(44, 206);
+            LblHospital.Location = new Point(10, 148);
             LblHospital.Name = "LblHospital";
-            LblHospital.Size = new Size(65, 20);
+            LblHospital.Size = new Size(51, 15);
             LblHospital.TabIndex = 2;
             LblHospital.Text = "Hospital";
             // 
             // LblAddress
             // 
             LblAddress.AutoSize = true;
-            LblAddress.Location = new Point(44, 245);
+            LblAddress.Location = new Point(10, 177);
             LblAddress.Name = "LblAddress";
-            LblAddress.Size = new Size(62, 20);
+            LblAddress.Size = new Size(49, 15);
             LblAddress.TabIndex = 3;
             LblAddress.Text = "Address";
             // 
             // TxtDoctorName
             // 
-            TxtDoctorName.Location = new Point(206, 39);
+            TxtDoctorName.Location = new Point(152, 22);
+            TxtDoctorName.Margin = new Padding(3, 2, 3, 2);
             TxtDoctorName.Name = "TxtDoctorName";
-            TxtDoctorName.Size = new Size(234, 27);
+            TxtDoctorName.Size = new Size(205, 23);
             TxtDoctorName.TabIndex = 1;
             // 
             // TxtHospital
             // 
-            TxtHospital.Location = new Point(206, 206);
+            TxtHospital.Location = new Point(152, 148);
+            TxtHospital.Margin = new Padding(3, 2, 3, 2);
             TxtHospital.Name = "TxtHospital";
-            TxtHospital.Size = new Size(234, 27);
+            TxtHospital.Size = new Size(205, 23);
             TxtHospital.TabIndex = 5;
             // 
             // TxtAddress
             // 
-            TxtAddress.Location = new Point(206, 245);
+            TxtAddress.Location = new Point(152, 177);
+            TxtAddress.Margin = new Padding(3, 2, 3, 2);
             TxtAddress.Multiline = true;
             TxtAddress.Name = "TxtAddress";
-            TxtAddress.Size = new Size(234, 149);
+            TxtAddress.Size = new Size(205, 113);
             TxtAddress.TabIndex = 6;
             // 
             // BtnAddDoctor
             // 
-            BtnAddDoctor.Location = new Point(278, 413);
+            BtnAddDoctor.Location = new Point(215, 303);
+            BtnAddDoctor.Margin = new Padding(3, 2, 3, 2);
             BtnAddDoctor.Name = "BtnAddDoctor";
-            BtnAddDoctor.Size = new Size(162, 29);
+            BtnAddDoctor.Size = new Size(142, 22);
             BtnAddDoctor.TabIndex = 7;
             BtnAddDoctor.Text = "Add";
             BtnAddDoctor.UseVisualStyleBackColor = true;
@@ -117,49 +122,52 @@
             // 
             // TxtMobileNum
             // 
-            TxtMobileNum.Location = new Point(206, 83);
+            TxtMobileNum.Location = new Point(152, 56);
+            TxtMobileNum.Margin = new Padding(3, 2, 3, 2);
             TxtMobileNum.Name = "TxtMobileNum";
-            TxtMobileNum.Size = new Size(234, 27);
+            TxtMobileNum.Size = new Size(205, 23);
             TxtMobileNum.TabIndex = 2;
             // 
             // LblMobile
             // 
             LblMobile.AutoSize = true;
-            LblMobile.Location = new Point(44, 83);
+            LblMobile.Location = new Point(10, 56);
             LblMobile.Name = "LblMobile";
-            LblMobile.Size = new Size(114, 20);
+            LblMobile.Size = new Size(91, 15);
             LblMobile.TabIndex = 9;
             LblMobile.Text = "Mobile Number";
             // 
             // TxtSpecialization
             // 
-            TxtSpecialization.Location = new Point(206, 169);
+            TxtSpecialization.Location = new Point(152, 120);
+            TxtSpecialization.Margin = new Padding(3, 2, 3, 2);
             TxtSpecialization.Name = "TxtSpecialization";
-            TxtSpecialization.Size = new Size(234, 27);
+            TxtSpecialization.Size = new Size(205, 23);
             TxtSpecialization.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(44, 169);
+            label1.Location = new Point(10, 120);
             label1.Name = "label1";
-            label1.Size = new Size(102, 20);
+            label1.Size = new Size(79, 15);
             label1.TabIndex = 11;
             label1.Text = "Specialization";
             // 
             // TxtDegree
             // 
-            TxtDegree.Location = new Point(206, 127);
+            TxtDegree.Location = new Point(152, 88);
+            TxtDegree.Margin = new Padding(3, 2, 3, 2);
             TxtDegree.Name = "TxtDegree";
-            TxtDegree.Size = new Size(234, 27);
+            TxtDegree.Size = new Size(205, 23);
             TxtDegree.TabIndex = 3;
             // 
             // LblDegree
             // 
             LblDegree.AutoSize = true;
-            LblDegree.Location = new Point(44, 127);
+            LblDegree.Location = new Point(10, 88);
             LblDegree.Name = "LblDegree";
-            LblDegree.Size = new Size(58, 20);
+            LblDegree.Size = new Size(44, 15);
             LblDegree.TabIndex = 13;
             LblDegree.Text = "Degree";
             // 
@@ -178,27 +186,30 @@
             PnlDoctor.Controls.Add(LblMobile);
             PnlDoctor.Controls.Add(TxtAddress);
             PnlDoctor.Controls.Add(BtnAddDoctor);
-            PnlDoctor.Location = new Point(61, 50);
+            PnlDoctor.Location = new Point(10, 38);
+            PnlDoctor.Margin = new Padding(3, 2, 3, 2);
             PnlDoctor.Name = "PnlDoctor";
-            PnlDoctor.Size = new Size(516, 493);
+            PnlDoctor.Size = new Size(374, 370);
             PnlDoctor.TabIndex = 15;
             // 
             // PnlDcotorList
             // 
             PnlDcotorList.Controls.Add(DgvDoctor);
-            PnlDcotorList.Location = new Point(607, 50);
+            PnlDcotorList.Location = new Point(390, 38);
+            PnlDcotorList.Margin = new Padding(3, 2, 3, 2);
             PnlDcotorList.Name = "PnlDcotorList";
-            PnlDcotorList.Size = new Size(829, 493);
+            PnlDcotorList.Size = new Size(577, 370);
             PnlDcotorList.TabIndex = 16;
             // 
             // DgvDoctor
             // 
             DgvDoctor.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             DgvDoctor.Columns.AddRange(new DataGridViewColumn[] { DgvColName, DgvColMobileNumber, DgvColHospital, DgvColDegree, DgvColSpecialization, DgvColAddress, DgvColId });
-            DgvDoctor.Location = new Point(12, 39);
+            DgvDoctor.Location = new Point(10, 22);
+            DgvDoctor.Margin = new Padding(3, 2, 3, 2);
             DgvDoctor.Name = "DgvDoctor";
             DgvDoctor.RowHeadersWidth = 51;
-            DgvDoctor.Size = new Size(801, 403);
+            DgvDoctor.Size = new Size(564, 302);
             DgvDoctor.TabIndex = 0;
             // 
             // DgvColName
@@ -254,12 +265,15 @@
             // 
             // DoctorForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1482, 653);
+            BackColor = Color.LightCyan;
+            ClientSize = new Size(984, 561);
             Controls.Add(PnlDcotorList);
             Controls.Add(PnlDoctor);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "DoctorForm";
             Text = "Doctor";
             Load += DoctorForm_Load;

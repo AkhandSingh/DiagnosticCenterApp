@@ -33,6 +33,6 @@ namespace AdcData.Interfaces
         /// <param name="endDate">Start Date</param>
         /// <param name="doctorName"></param>
         /// <returns></returns>
-        IEnumerable<PatientDiagnostic> GetPatientDiagnostic(DateTime startDate, DateTime endDate, string? doctorName);
+        IEnumerable<PatientDiagnostic> GetPatientDiagnostic(DateTime startDate, DateTime endDate, string? doctorName = null, bool? isPregnency = null);
     }
 }

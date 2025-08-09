@@ -29,11 +29,16 @@ namespace ADC
             receiptForm.Show();
         }
 
-        private void ToolStripPrintMontlyPatientReport_Click(object sender, EventArgs e)
+        private void ToolStripPrintMonthlyPatientReport_Click(object sender, EventArgs e)
         {
             MonthlyPatientReports monthlyPatientReports = new MonthlyPatientReports();
             monthlyPatientReports.Show();
+        }
 
+        private void ToolStripPrintMonthlyPatientCMOReport_Click(object sender, EventArgs e)
+        {
+            MonthlyPatientCMOReports monthlyPatientCMOReports = new MonthlyPatientCMOReports();
+            monthlyPatientCMOReports.Show();
         }
     }
 }

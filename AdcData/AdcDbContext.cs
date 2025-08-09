@@ -1,6 +1,6 @@
 using AdcData.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace AdcData
 {
@@ -10,9 +10,20 @@ namespace AdcData
         public DbSet<Patient> Patients { get; set; } = null!;
         public DbSet<Diagnostic> Diagnoses { get; set; } = null!;
 
+        private static string GetConnectionString()
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            return configuration.GetConnectionString("AdcDB")
+                   ?? throw new InvalidOperationException("Connection string 'AdcDB' not found.");
+        }
+
         public AdcDbContext()
             : base(new DbContextOptionsBuilder<AdcDbContext>()
-                .UseSqlServer("Data Source=DESKTOP-D68JPH2;Initial Catalog=ADC;Integrated Security=True;TrustServerCertificate=True;")
+                .UseSqlServer(GetConnectionString())
                 .Options)
         {
         }

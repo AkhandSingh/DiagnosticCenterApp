@@ -25,23 +25,21 @@ namespace ADC
 
         private void AddDetails_Click(object sender, EventArgs e)
         {
+            long mobileNumber;
+            long.TryParse(TxtMobileNum.Text, out mobileNumber);
+            if (mobileNumber <= 0 || TxtMobileNum.Text.Length < 10)
+            {
+                MessageBox.Show("Please enter a valid mobile number.");
+                return;
+            }
+
+            if (!ValidateRequiredFields())
+            {
+                return;
+            }
+
             try
             {
-                long mobileNumber;
-                long.TryParse(TxtMobileNum.Text, out mobileNumber);
-                if (mobileNumber <= 0 || TxtMobileNum.Text.Length < 10)
-                {
-                    MessageBox.Show("Please enter a valid mobile number.");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(TxtPatientName.Text) || string.IsNullOrWhiteSpace(CmbAge.Text) ||
-                    string.IsNullOrWhiteSpace(CmbSex.Text) || string.IsNullOrWhiteSpace(TxtAddress.Text) ||
-                    string.IsNullOrWhiteSpace(TxtGaurdian.Text) || string.IsNullOrWhiteSpace(CmbDiagnostic.Text))
-                {
-                    MessageBox.Show("Please fill in all required fields.");
-                    return;
-                }
-
                 long patientId;
                 var patient = _patientRepository.GetPatientByMobileNumber(mobileNumber);
                 if (patient != null)
@@ -82,20 +80,18 @@ namespace ADC
                     Manager = string.IsNullOrWhiteSpace(TxtManager.Text) ? null : TxtManager.Text,
                     IsPregnent = ChkIsPregnent.Checked,
                     LengthOfPregnency = string.IsNullOrWhiteSpace(CmbLenOfPregnency.Text) ? null : lengthOfPregnancy,
-                    ChildrenWithSex = string.IsNullOrWhiteSpace(TxtChildren.Text) ? null: TxtChildren.Text,
+                    ChildrenWithSex = string.IsNullOrWhiteSpace(TxtChildren.Text) ? null : TxtChildren.Text,
                     Sonologist = (!ChkIsPregnent.Checked || string.IsNullOrWhiteSpace(CmbSonologist.Text)) ? null : CmbSonologist.Text.ToString(),
                 };
 
                 _diagnosticRepository.Add(diagnostic);
                 _diagnosticRepository.SaveChanges();
+                MessageBox.Show("Patient added sucessfully");
+                ClearFields();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error adding patient: {ex.Message}");
-            }
-            finally
-            {
-                ClearFields();
             }
         }
 
@@ -159,7 +155,7 @@ namespace ADC
         {
             try
             {
-               
+
                 if (string.IsNullOrWhiteSpace(TxtSearchMobileNumber.Text) || TxtSearchMobileNumber.Text.Length < 10)
                 {
                     MessageBox.Show("Please enter a valid mobile number to search.");
@@ -241,6 +237,50 @@ namespace ADC
             TxtChildren.Visible = ChkIsPregnent.Checked;
             LblSonologist.Visible = ChkIsPregnent.Checked;
             CmbSonologist.Visible = ChkIsPregnent.Checked;
+        }
+
+        private void BtnClear_Click(object sender, EventArgs e)
+        {
+            ClearFields();
+        }
+
+        private bool ValidateRequiredFields()
+        {
+            List<string> requiredFields = new List<string>();
+            if (string.IsNullOrWhiteSpace(TxtPatientName.Text))
+            {
+                requiredFields.Add("Patient name");
+            }
+            if (string.IsNullOrWhiteSpace(CmbAge.Text))
+            {
+                requiredFields.Add("Age");
+            }
+
+            if (string.IsNullOrWhiteSpace(TxtAddress.Text))
+            {
+                requiredFields.Add("Address");
+            }
+            if (string.IsNullOrWhiteSpace(TxtGaurdian.Text))
+            {
+                requiredFields.Add("Husband/ Father name");
+            }
+            if (string.IsNullOrWhiteSpace(CmbDiagnostic.Text))
+            {
+                requiredFields.Add("Diagnostic");
+            }
+
+            if (requiredFields.Count > 0)
+            {
+                MessageBox.Show($"Please fill in all required fields {string.Join(", ", requiredFields)}");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void PnlPatient_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

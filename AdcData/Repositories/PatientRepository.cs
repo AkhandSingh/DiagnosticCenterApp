@@ -48,7 +48,7 @@ namespace AdcData.Repositories
                 .FirstOrDefault(p => p.MobileNumber == mobileNumber);
         }
 
-        public IEnumerable<PatientDiagnostic> GetPatientDiagnostic(DateTime startDate, DateTime endDate, string? doctorName)
+        public IEnumerable<PatientDiagnostic> GetPatientDiagnostic(DateTime startDate, DateTime endDate, string? doctorName = null, bool? isPregnency= null)
         {
             var patientDiagnostics = _context.Patients.AsNoTracking()
                .Join(_context.Diagnoses.AsNoTracking(),
@@ -59,7 +59,12 @@ namespace AdcData.Repositories
 
             if (!string.IsNullOrEmpty(doctorName))
             {
-                patientDiagnostics = patientDiagnostics.Where(p => p.Diagnostic.ReferredBy == doctorName);
+                patientDiagnostics = patientDiagnostics.Where(p => !string.IsNullOrWhiteSpace(p.Diagnostic.ReferredBy) && p.Diagnostic.ReferredBy.ToLower().Contains(doctorName.ToLower()));
+            }
+
+            if(isPregnency.HasValue)
+            {
+                patientDiagnostics = patientDiagnostics.Where(p => p.Diagnostic.IsPregnent == isPregnency.Value);
             }
 
             return patientDiagnostics != null

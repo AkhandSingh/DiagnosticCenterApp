@@ -12,7 +12,7 @@ namespace AdcData.Models
         public string? ChildrenWithSex { get; set; }
         public string? Sonologist { get; set; }
         public string DiagnosticCategory { get; set; }
-        public string DiagnosticSubCategory { get; set; }
+        public string? DiagnosticSubCategory { get; set; }
         public string ReferredBy { get; set; } = null!;
         public DateTime DiagnosticDate { get; set; }
         public string? Indication { get; set; }
